@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/profileView.css">
+    <title>Profile User</title>
+</head>
+<body>
+
+    <%- include('partials/header.ejs') %>
+    
+    <div class="middle">
+
+        <div class="user">
+            <div class="profilePhoto">
+                <img src="/uploads/<%= user.profileImage %>" alt="photo">
+            </div>
+            <div class="details">
+                <div class="name"><%= user.name %></div>
+                <div class="followers" id="flwcount">Followers: <%= user.followers.length %></div>
+                <div id='fbtn' value="<%= user._id %>" class="followButton">Follow<span>ing</span></div>
+                
+                <div class="bio"><div>Bio & Interests</div>
+                  <pre><%= user.bio %></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="blogsContainer">
+            <span>User Blogs</span>
+
+            <% blogs.forEach(blog => { %>
+                <a href="/blogview/<%= blog._id %>">
+                    <div class="blog">
+                      <div class="blogImage">
+                        <img src="/uploads/<%=blog.image %>" alt="blogImage">
+                      </div>
+                      <div class="blogContent">
+                        <span class="heading"><%= blog.title %></span>
+                        <div class="likes">Liked by: <%= blog.likes %>  <span>Comments: <%= blog.comment.length %></span></div>
+                        <span class="time">Added on: <%= blog.date.toDateString() %></span>
+                      </div>
+                        
+                    </div>
+      
+                  </a>
+             
+            <% }) %>
+            
+            <% if (blogs.length==0) { %>
+             
+                <div class="emptyBlog">
+               
+                    <span>No Blogs To Show</span>
+                      
+                  </div>
+            <% } %>
+            
+           
+
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+
+    <script>
+
+        const a=document.getElementById('fbtn');
+        
+        const statusCheck=async ()=>{
+
+            const value=a.getAttribute("value");
+            
+            const result= await fetch(`/follow-status/${value}`);
+            const data=await result.json();
+
+            if(data.status){
+                a.classList.toggle("following");
+            }
+        }
+        statusCheck();
+
+
+        a.addEventListener("click",async ()=>{
+            a.classList.toggle("following");
+
+            const value=a.getAttribute("value");
+            
+            const result= await fetch(`/addfollower/${value}`);
+            const data=await result.json();
+
+            document.getElementById('flwcount').innerHTML=`Followers: ${data.followers.length}`;
+
+        })
+    </script>
+    
+</body>
+</html>

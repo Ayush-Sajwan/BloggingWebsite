@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .header-container{
+            height: 8vh;
+            width: 100%;
+            position: sticky;
+            top: 0px;
+           
+        }
+        nav{
+            display: flex; 
+            height: 100%;
+            width: 100%;
+            justify-content: space-between;
+            background-color: black;
+            overflow: hidden;
+             
+        }
+        
+        .front{
+            padding-left: 10px;
+            display: flex;
+            height: 100%;
+            width: 40%;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo {
+            width: 8%;    
+        }
+        .logo img{
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;  
+        }
+        .front .title{
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .front .title>a{
+            text-decoration: none;
+            color: white;
+        }
+        .back{
+            width: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin: 0px 6%;
+        }
+        .back a{
+            text-decoration: none;
+            color: white;
+            font-family: sans-serif;
+            font-size: 1rem;
+            padding: 1% 2%;
+            margin: 2%;
+            border-radius: 10%;
+        }
+        .back a:hover{
+            background-color: white;
+
+            color: black;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <nav>
+        
+          <div class="front">
+           
+            <div class="logo"><img src="/img/logo.jpg" alt="logo" /></div>
+            <div class="title"><a href="/">BLOGKAGE</a></div>
+           
+          </div>
+          
+          <div class="back">
+            <a href="/blogs">Blogs</a>
+            <a href="/addblog">Add Blog</a>
+            <a href="/dashboard">Dashboard</a>
+          </div>
+        </nav>
+      </div>
+  
+    
+</body>
+</html>

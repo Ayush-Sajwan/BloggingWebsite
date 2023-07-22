@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login-Blogkage</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+    <%- include('partials/header.ejs') %>
+
+
+    <% if (messages.message) { %>
+
+      <!-- Modal -->
+      <div class="modal">
+
+        <div class="modal-content">
+          
+          <div class="modalImage">
+            <img src="img/modalimage.jpg" alt="image">
+          </div>
+          <div class="modal-message">
+            Error Occurred!!<br>
+            <%= messages.message %>
+          </div>
+          <button id="modalClose">Close</button>
+        </div>
+          
+        </div>
+  
+      <% } %>
+
+
+    <div class="middle">
+
+        <div class="form">
+            <div class="heading">LOG IN</div>
+            
+            <form action="/login" method="post">
+                <div class="input">
+                  <label for="email">Email:</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input">
+                  <label for="password">Password:</label>
+                  <input type="password" id="password" name="password" required>
+                </div>
+                <div class="button">
+                    <button type="submit">Log In</button>
+                </div>
+              </form>
+            </div>
+
+            <div class="message">
+                <span id="msg">Welcome Back !!!!!!</span>
+                <p> Hope you got some new Experiences to share</p>
+            </div>
+            
+
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+
+
+    <script>
+      document.getElementById("modalClose").addEventListener("click",()=>{
+        document.getElementsByClassName("modal")[0].style.display="none";
+      })
+    </script>
+
+</body>
+</html>

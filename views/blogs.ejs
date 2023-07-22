@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blogkage</title>
+    <link rel="stylesheet" href="/css/blogs.css" />
+  </head>
+  <body>
+    <%- include('partials/header.ejs') %>
+
+    <div class="middle">
+      <% blogs.forEach(blog => { %>
+
+      <div class="blogOuter">
+
+        <div class="imgbox">
+          <img src="uploads/<%=blog.image %>" alt="img" />
+        </div>
+
+        <div class="blog">
+
+          <a href="/blogview/<%= blog._id %>">
+
+            <div class="blog-title"><%= blog.title %></div>
+            <div class="body"><%= blog.content.substring(0,300) %></div>
+
+          </a>
+
+          <div class="user">
+
+           
+            <a href="/profileview/<%= blog.user_id %>">Created By :<%= blog.user %></a> 
+            
+            <span>
+              Likes :
+              <span id="<%= blog._id %>"><%= blog.likes %></span>
+            </span>
+
+            <button class="likeButtons" value="<%= blog._id %>">
+              Like<span>d</span>
+            </button>
+
+          </div>
+          
+          
+        </div>
+
+      </div>
+      <% }) %>
+
+      </div>
+
+      <%- include('partials/footer.ejs') %>
+
+    <script>
+      const likeButtonStatusUpdate = async function () {
+        const url = window.location.href + "/status";
+        const resp = await fetch(url);
+        const data = await resp.json();
+
+        const likedBlogsArray = data.blogs_liked;
+
+        let likeButton = document.getElementsByClassName("likeButtons");
+
+        for (i = 0; i < likeButton.length; i++) {
+          if (likedBlogsArray.includes(likeButton[i].getAttribute("value"))) {
+            likeButton[i].classList.toggle("liked");
+          }
+        }
+      };
+
+      likeButtonStatusUpdate();
+
+      //this function is responsilbe for updating the like counter
+      //with a given id
+      var updateLikeCounter = function (id, likes) {
+        document.getElementById(id).innerHTML = likes;
+      };
+
+      //this function sends a request to server to increment the likes of blog
+      var likeFunction = async function () {
+        this.classList.toggle("liked");
+        //getting value attribute of button
+        const id = this.getAttribute("value");
+        //generating the url
+        const url = window.location.href + `/like/${id}`;
+
+        //making a fetch request
+        const resp = await fetch(url);
+        const data = await resp.json();
+        const sid = String(id);
+        updateLikeCounter(sid, data.likes);
+      };
+
+      var likeButton = document.getElementsByClassName("likeButtons");
+      for (var i = 0; i < likeButton.length; i++) {
+        likeButton[i].addEventListener("click", likeFunction);
+      }
+    </script>
+  </body>
+</html>

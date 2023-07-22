@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog Kage</title>
+    <link rel="stylesheet" href="css/homepage.css" />
+  </head>
+  <body>
+
+    <%- include('partials/header.ejs') %>
+
+
+
+    <div class="middle">
+
+      <div class="login">
+
+        <div class="text">
+          <h1>Welcome to the Blogkage!!</h1>
+          <p>
+            Start Writing about your own Anime experineces from today and join
+            community of fans just like you.
+          </p>
+        </div>
+
+        <div class="links">
+           <a href="/login"><button id="login"> Login</button></a>
+          <a href="/signup"><button id="signup"> Signup</button></a>
+        </div>
+      </div>
+
+
+      <div class="imgcontainer">
+        <img src="img/home2.jpeg" alt="image" />
+      </div>
+
+      </div>
+
+      
+
+
+
+   <%- include('partials/footer.ejs') %>
+
+
+
+
+
+    <script>
+      const a = document.querySelector(".imgcontainer img");
+      setInterval(() => {
+        a.src = "img/home1.jpg";
+      }, 8000);
+
+      setTimeout(() => {
+        setInterval(() => {
+          a.src = "img/home2.jpeg";
+        }, 8000);
+      }, 4000);
+    </script>
+
+
+
+
+  </body>
+</html>

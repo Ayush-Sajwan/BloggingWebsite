@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add a Blog </title>
+    <link rel="stylesheet" href="css/addBlog.css">
+  </head>
+  <body>
+    
+
+    <%- include('partials/header.ejs') %>
+
+    <div class="middle" >
+
+        <form action="/addblog" method="post"  enctype="multipart/form-data">
+
+          <div class="input">
+            <label for="exampleFormControlInput1" class="form-label">Blog Title</label>
+            <input  class="form-control" name="title" id="exampleFormControlInput1" placeholder="Title" required>
+          </div>
+
+          <div class="input">
+            <label for="exampleFormControlTextarea1" class="form-label">Blog content</label>
+            <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="5" required></textarea>
+          </div>
+
+          <div class="input">
+            <label for="exampleFormControlTextarea1" class="form-label">Blog Image</label>
+            <input type="file" name="file" id="file" accept="image/png, image/jpeg ,image/jpg" required>
+          </div>
+
+
+          <button type="submit" class="btn">Submit</button>
+
+        </form>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+
+    
+  </body>
+</html>

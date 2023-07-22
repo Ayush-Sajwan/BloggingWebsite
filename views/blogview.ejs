@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogkage</title>
+    <link rel="stylesheet" href="/css/blogview.css">
+</head>
+<body>
+    
+    <%- include('partials/header.ejs') %>
+
+
+    <div class="middle">
+        
+
+        <div class="blog">
+            <div id="heading"><%= blog.title %></div>
+            <div class="bImage">
+                <img src="/uploads/<%=blog.image %>" alt="img" />
+            </div>
+            <p><%= blog.content %></p>
+            <div id="user"><span>Written By: <br><%= blog.user %></span></div>
+        </div>
+
+        
+        <div class="comments">
+            <div id="cheading">Comments</div>
+
+            <div class="userComment">
+                <form action="/comment/<%=blog._id%>" method="post">
+
+                    <input type="text" name="content" id="comment" placeholder="Write Comment" required>
+
+                    <button type="submit">Add Comment</button>
+                </form>
+
+           </div>
+        
+            <% blog.comment.forEach(comment=> { %>
+
+                
+                <div class="commentBody">
+                    <span><%= comment.content %></span>
+                    <div id="cuser">
+                    User: <%= comment.user %>
+                    </div>
+                </div>
+             
+            <% }) %>
+           
+
+
+        </div>
+
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+
+
+</body>
+</html>

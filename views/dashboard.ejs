@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DashBoard</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <%- include('partials/header.ejs') %>
+    
+    <div class="middle">
+      <div class="profile">
+        <div class="profilePhoto">
+          <% if (user.profileImage==="") { %>
+            <img src="img/signup1.jpg" alt="ProfilePhoto" />
+
+          <% } else { %>
+            <img src="uploads/<%= user.profileImage %>" alt="ProfilePhoto" />
+            <% } %>
+            
+        </div>
+        <div class="info">
+          <h2><%= user.name %></h2>
+          <%= user.email %><br>
+          Followers: <%= user.followers.length %>
+        </div>
+
+        <div class="changeImage">
+          <button id="updatebtn">Update Profile Photo</button>
+
+          <form
+            id="updateform"
+            class="notVisible"
+            action="/updateProfilePhoto/<%= user._id %>"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <input
+              type="file"
+              name="file"
+              id="file"
+              accept="image/png, image/jpeg ,image/jpg"
+              required
+            />
+            <button type="submit">Change Photo</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="rightHalf">
+
+        <div class="bio">
+            <span>Bio & Interests</span>
+            <p><pre><%= user.bio %></pre></p>
+        </div>
+
+        <div id="updateBio"><a href="/updateBio">Update Bio</a></div>
+
+        <div class="blogsContainer">
+            <span>My Blogs</span>
+
+            
+
+            <% if (blogs.length===0) { %>
+             
+              <div class="emptyBlog">
+               
+                <span>No Blogs To Show</span>
+                  
+              </div>
+            
+            <% } else { %>
+
+              <% blogs.forEach(blog => { %>
+               
+             
+             <a href="/blogview/<%= blog._id %>">
+              <div class="blog">
+                <div class="blogImage">
+                  <img src="uploads/<%=blog.image %>" alt="blogImage">
+                </div>
+                <div class="blogContent">
+                  <span class="heading"><%= blog.title %></span>
+                  <div class="likes">Liked by: <%= blog.likes %>  <span>Comments: <%= blog.comment.length %></span></div>
+                  <span class="time">Added on: <%= blog.date.toDateString() %></span>
+                </div>
+                  
+              </div>
+
+            </a>
+              <% }) %>
+                
+              <% } %>
+            
+
+        </div>
+
+        <div class="addButton">
+          <a href="/addblog">Add Blog</a>
+        </div>
+      </div>
+    </div>
+    <%- include('partials/footer.ejs') %>
+
+    <script>
+      document.getElementById("updatebtn").addEventListener("click", () => {
+        document.getElementById("updateform").classList.toggle("visibleForm");
+      });
+    </script>
+  </body>
+</html>
