@@ -80,19 +80,8 @@ app.use("/blogs/like",like);
 
 
 //like status route
-app.get("/blogs/status",async (req,res)=>{
-
-    try{
-        const email=req.session.email;
-    
-        const result=await User.findOne({email:email});
-        res.json(result);
- 
-    }
-    catch(err){
-        console.log(`${err} occured while sending status of likes `);
-    }
-});
+const likeStatus=require('./routes/like-status.js');
+app.use("/blogs/status",likeStatus);
 
 //dashboard Route
 const dashboard=require('./routes/dashboard.js');
@@ -116,38 +105,13 @@ const addfollower=require("./routes/addfollower.js");
 app.use("/addfollower",addfollower);
 
 //following status route
-app.get("/follow-status/:id",async (req,res)=>{
-
-    try{
-        const email=req.session.email;
-        const id=req.params.id;
-
-        const fUser=await User.findOne({_id:id});
-    
-        const cUser=await User.findOne({email:email});
-
-        if(fUser.followers.includes(cUser._id)){
-            res.json({status:true});
-        }
-        else{
-            
-            res.json({status:false});
-        }
-       
- 
-    }
-    catch(err){
-        console.log(`${err} occured while sending status of likes `);
-    }
-});
+const followStatus=require("./routes/follow-status.js");
+app.use("/follow-status",followStatus);
 
 
 //commenting route
 const comment=require('./routes/comment.js');
 app.use("/comment",comment);
-
-
-
 
 
 
