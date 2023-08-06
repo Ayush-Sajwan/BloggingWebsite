@@ -1,0 +1,5 @@
+#Ignoring the Node Modules 
+node_modules
+
+#Ignoring the images folder
+public/uploads/
