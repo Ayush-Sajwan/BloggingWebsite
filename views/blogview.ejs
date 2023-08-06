@@ -20,7 +20,7 @@
                 <img src="/uploads/<%=blog.image %>" alt="img" />
             </div>
             <p><%= blog.content %></p>
-            <div id="user"><span>Written By: <br><%= blog.user %></span></div>
+            <div id="user"><a href="/profileview/<%= blog.user_id %>"><span>Written By: <br><%= blog.user %></span></a></div>
         </div>
 
         

@@ -51,7 +51,16 @@
 #user{
     display: flex;
     font-size: 1rem;
+    line-height: 1.5rem;
     width: 80%;
+}
+#user a{
+    text-decoration: none;
+    color: white;
+}
+#user a:hover{
+    background-color: white;
+    color: black;
 }
 
 .comments{
