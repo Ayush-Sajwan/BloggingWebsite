@@ -28,7 +28,7 @@ router.route("/:id")
  
     }
     catch(err){
-        console.log(`${err} occured while sending status of likes `);
+        console.log(`${err} occured while sending status of followers `);
         res.redirect("/login");
     }
 });
