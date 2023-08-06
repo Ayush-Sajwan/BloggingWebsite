@@ -3,9 +3,8 @@ const ejs=require("ejs");
 const mongoose=require("mongoose");
 const bodyparser=require("body-parser");
 const session=require("express-session");
-const User=require("./schemas/userSchema");
 const flash=require("express-flash");
-const authUser=require('./routes/autheticate');
+const authUser=require('./middleware/autheticate');
 
 
 const app=express();
@@ -35,19 +34,13 @@ app.get("/",(req,res)=>{
 })
 
 //signup route
-const signup=require('./routes/signup.js');
-app.use("/signup",signup);
-
+app.use("/signup",require('./routes/signup'));
 
 //login route
-const login=require('./routes/login.js');
-app.use("/login",login);
+app.use("/login",require('./routes/login'));
 
 //blogs display route
-const blogs=require('./routes/blogs.js');
-app.use("/blogs",authUser,blogs);
-
-
+app.use("/blogs",authUser,require('./routes/blogs'));
 
 //route for uploading files
 const multer=require('multer');
@@ -66,62 +59,43 @@ const upload=multer({
 
 
 //adding blogs route
-const addblog=require('./routes/addBlog.js');
-app.use("/addblog",authUser,upload,addblog);
+app.use("/addblog",authUser,upload,require('./routes/addBlog'));
 
 //blog view route
-const blogview=require('./routes/blogview.js');
-app.use("/blogview",authUser,blogview);
+app.use("/blogview",authUser,require('./routes/blogview'));
 
 //liking route
-const like=require('./routes/like.js');
-app.use("/blogs/like",authUser,like);
-
+app.use("/blogs/like",authUser,require('./routes/like'));
 
 //like status route
-const likeStatus=require('./routes/like-status.js');
-app.use("/blogs/status",authUser,likeStatus);
-
-
+app.use("/blogs/status",authUser,require('./routes/like-status'));
 
 //dashboard Route
-const dashboard=require('./routes/dashboard.js');
-app.use("/dashboard",authUser,dashboard);
+app.use("/dashboard",authUser,require('./routes/dashboard'));
 
 //update profile photo route
-const updateProfilePhoto=require('./routes/updateProfilePhoto.js');
-app.use("/updateProfilePhoto",upload,updateProfilePhoto);
+app.use("/updateProfilePhoto",upload,require('./routes/updateProfilePhoto'));
 
 //update Bio route
-const updateBio=require('./routes/updateBio.js');
-app.use("/updateBio",authUser,updateBio);
-
+app.use("/updateBio",authUser,require('./routes/updateBio'));
 
 //profileview route
-const profileview=require('./routes/profileView.js');
-app.use("/profileview",authUser,profileview);
+app.use("/profileview",authUser,require('./routes/profileView'));
 
 //add follower route
-const addfollower=require("./routes/addfollower.js");
-app.use("/addfollower",authUser,addfollower);
+app.use("/addfollower",authUser,require("./routes/addfollower"));
 
 //following status route
-const followStatus=require("./routes/follow-status.js");
-app.use("/follow-status",authUser,followStatus);
-
+app.use("/follow-status",authUser,require("./routes/follow-status"));
 
 //commenting route
-const comment=require('./routes/comment.js');
-app.use("/comment",authUser,comment);
-
+app.use("/comment",authUser,require('./routes/comment'));
 
 //logged in status route for logout button
-const loginStatus=require('./routes/loggedInStatus.js');
-app.use("/loginStatus",loginStatus);
+app.use("/loginStatus",require('./routes/loggedInStatus'));
 
 //logout functionality for logout button
-const logout=require('./routes/logout.js');
-app.use("/logout",logout);
+app.use("/logout",require('./routes/logout'));
 
 
 

@@ -4,7 +4,8 @@ const router=express.Router();
 router.get("/",(req,res)=>{
 
     req.session.destroy(function(err) {
-        // cannot access session here
+       
+        console.log("User session destroyed");
         res.redirect('/login');
       })
 })
