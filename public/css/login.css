@@ -15,9 +15,9 @@
 }
 
 .modal-content{
-  width: 50%;
+  width: 60%;
   margin-top: 50px;
-  background-color: rgb(103, 121, 136);
+  background-color: #431e3e;
   display: flex;
   align-self: flex-start;
   flex-direction: column;
@@ -36,7 +36,8 @@
 
 .modal-message{
   text-align: center;
-  font-family: sans-serif;
+  font-family: monospace;
+  color: white;
   line-height: 2rem;
   font-size: 1.5rem;
 }
@@ -45,7 +46,9 @@
   font-size: 1.5rem;
     margin: 20px;
     border-radius: 10px;
-    padding: 10px;
+    box-shadow: none;
+    border-radius: none;
+    padding: 10px 30px;
     background-color: blue;
     color: white
 }
@@ -104,8 +107,9 @@
     font-size: 1.5rem;
   }
   .form .input input{
-    height: 40px;
-    font-size: 30px;
+    line-height: 2.5rem;
+    padding: 0px 10px;
+    font-size: 1.5rem;
     border-radius: 5px;
     width: 80%;
   }

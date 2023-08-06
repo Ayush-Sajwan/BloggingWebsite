@@ -119,8 +119,8 @@
 }
 .commentBody{
     width: 80%;
-    font-size: 1.2rem;
-    
+    font-size: 1.4rem;
+    font-family: monospace;
     background-color: rgba(137, 142, 142, 0.678);
     margin: 20px;
     padding: 20px;

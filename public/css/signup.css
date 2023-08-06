@@ -98,13 +98,16 @@
     margin: 10px 0px;
     padding-left: 30px;
     padding-top: 20px;
+    font-family: monospace;
+    gap: 5px;
     flex-direction: column;
     width: 60%;
     font-size: 1.5rem;
   }
   .form .input input{
     font-size: 1.5rem;
-    padding: 10px 0px;
+    line-height: 2.5rem;
+    padding: 0px 10px;
     border-radius: 5px;
     width: 80%;
   }

@@ -5,6 +5,7 @@ const bodyparser=require("body-parser");
 const session=require("express-session");
 const User=require("./schemas/userSchema");
 const flash=require("express-flash");
+const authUser=require('./routes/autheticate');
 
 
 const app=express();
@@ -30,10 +31,8 @@ mongoose.connect("mongodb://127.0.0.1:27017/blogKage")
 
 //home route
 app.get("/",(req,res)=>{
-
     res.render("homePage");
 })
-
 
 //signup route
 const signup=require('./routes/signup.js');
@@ -46,7 +45,7 @@ app.use("/login",login);
 
 //blogs display route
 const blogs=require('./routes/blogs.js');
-app.use("/blogs",blogs);
+app.use("/blogs",authUser,blogs);
 
 
 
@@ -68,24 +67,26 @@ const upload=multer({
 
 //adding blogs route
 const addblog=require('./routes/addBlog.js');
-app.use("/addblog",upload,addblog);
+app.use("/addblog",authUser,upload,addblog);
 
 //blog view route
 const blogview=require('./routes/blogview.js');
-app.use("/blogview",blogview);
+app.use("/blogview",authUser,blogview);
 
 //liking route
 const like=require('./routes/like.js');
-app.use("/blogs/like",like);
+app.use("/blogs/like",authUser,like);
 
 
 //like status route
 const likeStatus=require('./routes/like-status.js');
-app.use("/blogs/status",likeStatus);
+app.use("/blogs/status",authUser,likeStatus);
+
+
 
 //dashboard Route
 const dashboard=require('./routes/dashboard.js');
-app.use("/dashboard",dashboard);
+app.use("/dashboard",authUser,dashboard);
 
 //update profile photo route
 const updateProfilePhoto=require('./routes/updateProfilePhoto.js');
@@ -93,25 +94,34 @@ app.use("/updateProfilePhoto",upload,updateProfilePhoto);
 
 //update Bio route
 const updateBio=require('./routes/updateBio.js');
-app.use("/updateBio",updateBio);
+app.use("/updateBio",authUser,updateBio);
 
 
 //profileview route
 const profileview=require('./routes/profileView.js');
-app.use("/profileview",profileview);
+app.use("/profileview",authUser,profileview);
 
 //add follower route
 const addfollower=require("./routes/addfollower.js");
-app.use("/addfollower",addfollower);
+app.use("/addfollower",authUser,addfollower);
 
 //following status route
 const followStatus=require("./routes/follow-status.js");
-app.use("/follow-status",followStatus);
+app.use("/follow-status",authUser,followStatus);
 
 
 //commenting route
 const comment=require('./routes/comment.js');
-app.use("/comment",comment);
+app.use("/comment",authUser,comment);
+
+
+//logged in status route for logout button
+const loginStatus=require('./routes/loggedInStatus.js');
+app.use("/loginStatus",loginStatus);
+
+//logout functionality for logout button
+const logout=require('./routes/logout.js');
+app.use("/logout",logout);
 
 
 

@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .header-container{
             height: 8vh;
@@ -90,10 +89,27 @@
             <a href="/blogs">Blogs</a>
             <a href="/addblog">Add Blog</a>
             <a href="/dashboard">Dashboard</a>
+            <a href="/logout" id="logout">Logout</a>
           </div>
         </nav>
       </div>
   
     
+      <script>
+
+        fetch("/loginStatus")
+        .then((response)=>{
+            return response.json();
+        })
+        .then((result)=>{
+            console.log("Hello");
+            if(result.status===true){
+
+                document.getElementById('logout').style.display="block";
+            }else{
+                document.getElementById('logout').style.display="none";
+            }
+        })
+      </script>
 </body>
 </html>
